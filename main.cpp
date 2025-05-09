@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <conio.h>
 
 using namespace std;
 
@@ -44,18 +45,29 @@ int main()
     char input;   
     int playerPosition = boardSize / 2;
 
-    int num = 0;
     while (true) 
     {
         board[playerPosition] = '*';
-        system("cls");        
+        system("cls");
         paintBoard(board);
 
-        cin >> input;
-        num++;
-        if (num == 10) {
+        input = tolower(getch());
+
+        board[playerPosition] = ' ';
+        if (input == 'a') {
+            if (playerPosition > 0) {
+                playerPosition--;
+            }
+        } else if (input == 'd') {
+            // 9 + 1 < 10 => false
+            if (playerPosition + 1 < boardSize) {
+                playerPosition++;
+            }            
+        }
+
+        if (input == 'q') {
             break;
-        }        
+        }
     }
 
 }
