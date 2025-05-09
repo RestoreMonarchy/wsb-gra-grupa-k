@@ -12,27 +12,32 @@ using namespace std;
 // │ *     │
 // └───────┘
 
-void paintBoard(vector<char> &board) {
+
+
+
+void paintBoard(vector<vector<char>> &board) {
+
+    int width = board[0].size();
+    int height = board.size();
 
     cout << "+";
-    for (char c: board) {
-        cout << "-";
+    for (int i  = 0; i < width; i++) {
+        cout << "-" ;
     }
-    cout << "+";
-    cout << endl;
-    cout << "|";
+    cout << "+" << endl;
+    for (int y  = 0; y < height; y++) {
+        cout << "|";
+        for (int x = 0; x < width; x++) {
+            cout << board[y][x];
+        }
+        cout << "|" << endl;
+    }
 
-    for (char c: board) {
-        cout << c;
-    }
-
-    cout << "|";
-    cout << endl;
     cout << "+";
-    for (char c: board) {
-        cout << "-";
+    for (int i  = 0; i < width; i++) {
+        cout << "-" ;
     }
-    cout << "+";
+    cout << "+" << endl;
 }
 
 int main()
@@ -40,28 +45,29 @@ int main()
     // czyszczenie konsoli
     system("cls");
 
-    const int boardSize = 10;
-    vector<char> board(boardSize, ' ');
+    const int boardWidth = 20;
+    const int boardHeight = 20;
+    vector<vector<char>> board(boardHeight, vector<char>(boardWidth, ' '));
     char input;   
-    int playerPosition = boardSize / 2;
-
+    int playerXPosition = boardWidth / 2;
+    const int playerYPosition = boardHeight - 1;
     while (true) 
     {
-        board[playerPosition] = '*';
+        board[playerYPosition][playerXPosition] = '*';
         system("cls");
         paintBoard(board);
 
         input = tolower(getch());
 
-        board[playerPosition] = ' ';
+        board[playerYPosition][playerXPosition] = ' ';
         if (input == 'a') {
-            if (playerPosition > 0) {
-                playerPosition--;
+            if (playerXPosition > 0) {
+                playerXPosition--;
             }
         } else if (input == 'd') {
             // 9 + 1 < 10 => false
-            if (playerPosition + 1 < boardSize) {
-                playerPosition++;
+            if (playerXPosition + 1 < boardWidth) {
+                playerXPosition++;
             }            
         }
 
