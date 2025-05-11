@@ -12,9 +12,6 @@ using namespace std;
 // │ *     │
 // └───────┘
 
-
-
-
 void paintBoard(vector<vector<char>> &board) {
 
     int width = board[0].size();
@@ -57,7 +54,8 @@ int main()
         system("cls");
         paintBoard(board);
 
-        input = tolower(getch());
+        // _getch() zamiast getch()
+        input = tolower(_getch());
 
         board[playerYPosition][playerXPosition] = ' ';
         if (input == 'a') {
